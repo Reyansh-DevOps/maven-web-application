@@ -96,14 +96,14 @@
 	
 	    <repository>
 	      <id>nexus</id>
-	      <name>Mithun Technologies Releases Nexus Repository</name>
-	      <url>http://172.31.39.118:9980/mithuntechnologies/repository/citibank-release/</url>
+	      <name>nexus</name>
+	      <url>http://18.61.31.110:8081/repository/Walmart-release/</url>
 	    </repository>
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
-	      <name>Mithun Technologies Snapshot Nexus Repository </name>
-	      <url>http://172.31.39.118:9980/mithuntechnologies/repository/citibank-snapshot/</url>
+	      <name>nexus</name>
+	      <url>http://18.61.31.110:8081/repository/Walmart-snapshot/</url>
 	    </snapshotRepository>
 	    
 	</distributionManagement>
