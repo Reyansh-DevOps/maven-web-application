@@ -2,12 +2,11 @@ node {
 
 def mavenHome = tool name: "maven3.9.0"
 
-properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5'))])
-
 properties([pipelineTriggers([githubPush()])])
 
-timestamps{
+timestamps (){
 }
+  properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5'))])
 try{
 slackNotifications('STARTED')  
 stage ('CheckoutCode'){
