@@ -1,11 +1,14 @@
 node {
-timestamps{
-}
+
 def mavenHome = tool name: "maven3.9.1"
 
 properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5'))])
 
 properties([pipelineTriggers([githubPush()])])
+
+timestamps{
+}
+  
 stage ('CheckoutCode'){
 git branch: 'development', credentialsId: '9f8d5fae-236b-4e55-9783-09e5d764c446', url: 'https://github.com/Reyansh-DevOps/maven-web-application.git'
 }
