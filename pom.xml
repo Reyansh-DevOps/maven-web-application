@@ -102,7 +102,7 @@
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
-	      <name>nexus</name>
+	      <name>nexuss</name>
 	      <url>http://172.31.19.40:8081/repository/Walmart-snapshot/</url>
 	    </snapshotRepository>
 	    
