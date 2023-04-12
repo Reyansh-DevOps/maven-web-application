@@ -9,7 +9,7 @@
 </head>
 </head>
 <body>
-<h1 align="center">Welcome to Jenkins Scriptedway </h1>
+<h1 align="center">Welcome to Jenkins Scriptedway pipelines </h1>
 <h1 align="center"> Welcome to Mithun Software Solutions.We have a DevOps Master Program demo on April 7th at 7.00 PM IST for new batch.</h1>
 	<h1 align="center">   </h1>
 <hr>
