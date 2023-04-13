@@ -7,7 +7,8 @@ maven 'maven3.9.1'
 options {
   buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5') 
 }
-timestamps {
+options {
+  timestamps
 }
 stages{
 stage ('CheckoutCode'){
