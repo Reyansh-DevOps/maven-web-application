@@ -1,0 +1,84 @@
+pipeline{
+
+agent any
+tools{
+maven 'maven3.9.1'
+}
+options {
+  buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5') 
+}
+timestamps {
+}
+stages{
+stage ('CheckoutCode'){
+steps{
+  slackNotifications('STARTED')   
+git branch: 'development', credentialsId: '9f8d5fae-236b-4e55-9783-09e5d764c446', url: 'https://github.com/Reyansh-DevOps/maven-web-application.git'
+}
+}
+
+stage ('MavenBuild'){
+steps{
+sh "mvn clean package"
+}
+}
+/*
+stage ('ExecuteSonarQubeReport'){
+steps{
+sh "mvn clean sonar:sonar"
+}
+}
+
+stage ('UploadArtifactsIntoArtifactoryRepo'){
+steps{
+sh "mvn clean deploy"
+}
+}
+
+stage ('DeployIntoTomcatServer'){
+steps{
+sshagent(['ba435145-a02f-40ba-b935-ff9e17010f67']){
+sh "scp -o StrictHostKeyChecking=no  target/maven-web-application.war ec2-user@172.31.28.185:/opt/apache-tomcat-9.0.73/webapps"  
+}
+}
+}
+*/
+
+}//stages close
+
+post {
+  success {
+    slackNotifications(currentBuild.result)
+  }
+  failure {
+    slackNotifications(currentBuild.result)
+  }
+}
+
+}//pipeline close
+
+def slackNotifications(String buildStatus = 'STARTED') {
+  // build status of null means successful
+  buildStatus =  buildStatus ?: 'SUCCESS'
+  
+  // Default values
+  def colorName = 'RED'
+  def colorCode = '#FF0000'
+  def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+  def summary = "${subject} (${env.BUILD_URL})"
+
+  // Override default values based on build status
+  if (buildStatus == 'STARTED') {
+    colorName = 'YELLOW'
+    colorCode = '#FFFF00'
+  } else if (buildStatus == 'SUCCESS') {
+    colorName = 'GREEN'
+    colorCode = '#00FF00'
+  } else {
+    colorName = 'RED'
+    colorCode = '#FF0000'
+  }
+
+  // Send notifications
+  slackSend (color: colorCode, message: summary, channel: "#walmart")
+}
